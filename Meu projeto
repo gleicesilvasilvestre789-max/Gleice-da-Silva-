@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ODS e Segurança Digital — Gleice</title>
+  <meta name="description" content="ODS e Segurança Digital — projeto e projetos" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{
+      --bg:#071125;           /* page background */
+      --card:#0b1624;         /* dark card background */
+      --card-2:#0f2a56;       /* hero card */
+      --muted:#9aa6b3;
+      --white:#f7fbff;
+      --cyan:#09b6e6;
+      --blue-1:#0b6abf;
+      --gradient-start:#0e4f8f;
+      --gradient-end:#1f7bdc;
+      --card-radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--white);background:var(--bg);}
+    a{color:inherit}
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px 20px;
+      background:linear-gradient(90deg,var(--gradient-start),var(--gradient-end));
+      box-shadow:0 6px 24px rgba(3,8,18,0.4);
+      position:sticky;top:0;z-index:40;border-bottom-left-radius:6px;border-bottom-right-radius:6px;
+    }
+    header .brand{display:flex;flex-direction:column;gap:4px}
+    header h1{font-size:20px;margin:0;font-weight:800;letter-spacing:-0.3px}
+    header p{margin:0;font-size:12px;opacity:0.95}
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{font-weight:600;text-decoration:none;color:rgba(255,255,255,0.95)}
+    main{max-width:520px;margin:18px auto;padding:0 16px;}
+    /* Section title */
+    .section-title{font-size:22px;font-weight:800;margin:18px 0 8px;display:flex;align-items:center;gap:12px}
+    .section-title .bar{width:6px;height:36px;background:var(--cyan);border-radius:3px}
+    /* explanation box */
+    .explain{background:var(--card);padding:18px;border-radius:14px;color:var(--white);line-height:1.5}
+    /* ODS list */
+    .ods-list{margin-top:14px;display:flex;flex-direction:column;gap:18px;padding-bottom:12px}
+    .ods-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:20px;border-radius:20px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 22px rgba(2,8,23,0.45);
+    }
+    .ods-label{color:var(--cyan);font-weight:800;margin:0 0 8px 0}
+    .ods-sub{color:var(--muted);margin:0;font-weight:500}
+    /* Hero / Projects */
+    .hero{
+      margin-top:26px;
+      background:linear-gradient(180deg,var(--gradient-start),var(--gradient-end));
+      padding:28px;border-radius:20px;overflow:visible;position:relative;
+    }
+    .hero h2{font-size:28px;text-align:center;margin:0 0 14px;font-weight:800}
+    .projects{display:flex;flex-direction:column;gap:18px;margin-top:6px}
+    .project-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 10px 30px rgba(13,89,180,0.18), inset 0 2px 6px rgba(255,255,255,0.02);
+    }
+    .project-title{font-weight:800;margin:0 0 8px 0}
+    .project-desc{margin:0;color:rgba(245,250,255,0.9)}
+    .signup-wrap{display:flex;justify-content:center;margin-top:18px}
+    .signup-btn{
+      background:linear-gradient(180deg,#4ea6ff,#2b8bff);color:white;padding:12px 26px;border-radius:16px;border:0;font-weight:800;
+      box-shadow: 0 8px 22px rgba(27,119,255,0.28);
+    }
+    .signup-btn:active{transform:translateY(1px)}
+    /* chart card */
+    .chart-card{background:var(--card);padding:20px;border-radius:20px;margin-top:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(1,8,20,0.5)}
+    .chart-title{text-align:center;font-weight:800;margin:0 0 12px 0}
+    canvas{display:block;max-width:100%;height:220px}
+    footer{text-align:center;color:var(--muted);padding:28px 12px;font-size:13px}
+    /* mobile-like spacing */
+    @media(min-width:900px){
+      main{max-width:880px}
+      .columns{display:grid;grid-template-columns:1fr 420px;gap:20px}
+      .hero{border-radius:22px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>ODS e Segurança Digital</h1>
+      <p>Desenvolvido por Gleice da Silva Silvestre</p>
+    </div>
+    <nav aria-label="menu">
+      <a href="#ods">ODS</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#grafico">Gráfico</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Section: ODS -->
+    <section id="ods">
+      <div class="section-title"><span class="bar"></span> <span>Os 17 Objetivos de Desenvolvimento Sustentável</span></div>
+      <button id="toggleExplain" style="margin-bottom:12px;border-radius:12px;padding:10px 14px;background:var(--cyan);border:0;color:#022;font-weight:700;cursor:pointer">Ocultar explicação</button>
+      <div class="explain" id="explainBox" role="region">
+        <p style="margin:0"><strong>Os Objetivos de Desenvolvimento Sustentável (ODS)</strong> foram criados pela ONU em 2015 como parte da Agenda 2030. Representam um compromisso global para eliminar a pobreza, proteger o planeta e garantir paz e prosperidade até 2030.</p>
+      </div>
+
+      <div class="ods-list" id="odsList" aria-live="polite"></div>
+    </section>
+
+    <!-- Hero / Projects -->
+    <section id="projetos" class="hero" aria-labelledby="heroTitle">
+      <h2 id="heroTitle">Projetos em Segurança Digital</h2>
+      <div class="projects">
+        <div class="project-card">
+          <div class="project-title">🔒 Segurança Digital Comunitária</div>
+          <div class="project-desc">Capacita cidadãos sobre práticas seguras na internet, prevenção de golpes e proteção de dados pessoais.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-title">💻 Inclusão Digital Escolar</div>
+          <div class="project-desc">Promove o acesso à tecnologia e conscientiza jovens sobre o uso ético e responsável da internet.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-title">🧠 Capacitação de Multiplicadores</div>
+          <div class="project-desc">Forma líderes locais para replicar o conhecimento sobre segurança digital em suas comunidades.</div>
+        </div>
+      </div>
+
+      <div class="signup-wrap">
+        <button class="signup-btn" id="signupBtn">Inscrever-se</button>
+      </div>
+    </section>
+
+    <!-- Chart -->
+    <section id="grafico" class="chart-card" aria-labelledby="chartTitle">
+      <h3 id="chartTitle" class="chart-title">Progresso dos 17 ODS (Simulado 2025)</h3>
+      <canvas id="odsChart" role="img" aria-label="Gráfico de barras do progresso dos ODS"></canvas>
+    </section>
+  </main>
+
+  <footer>© 2025 — Desenvolvido por Gleice da Silva Silvestre</footer>
+
+  <script>
+    // Data (text as on your screenshots)
+    const ods = [
+      {n:1, title:"Erradicação da Pobreza"},
+      {n:2, title:"Fome Zero"},
+      {n:3, title:"Saúde e Bem-estar"},
+      {n:4, title:"Educação de Qualidade"},
+      {n:5, title:"Igualdade de Gênero"},
+      {n:6, title:"Água e Saneamento"},
+      {n:7, title:"Energia Limpa"},
+      {n:8, title:"Trabalho Decente"},
+      {n:9, title:"Indústria e Inovação"},
+      {n:10, title:"Redução das Desigualdades"},
+      {n:11, title:"Cidades Sustentáveis"},
+      {n:12, title:"Consumo Responsável"},
+      {n:13, title:"Ação Climática"},
+      {n:14, title:"Vida na Água"},
+      {n:15, title:"Vida Terrestre"},
+      {n:16, title:"Paz e Justiça"},
+      {n:17, title:"Parcerias"}
+    ];
+
+    // Insert cards into odsList
+    const list = document.getElementById('odsList');
+    ods.forEach(item=>{
+      const card = document.createElement('article');
+      card.className = 'ods-card';
+      card.tabIndex = 0;
+      card.innerHTML = `<div class="ods-label">ODS ${item.n}</div><div class="ods-sub">${item.title}</div>`;
+      list.appendChild(card);
+    });
+
+    // Toggle explanation button
+    const toggle = document.getElementById('toggleExplain');
+    const explainBox = document.getElementById('explainBox');
+    toggle.addEventListener('click', ()=>{
+      const open = explainBox.style.display !== 'none';
+      explainBox.style.display = open ? 'none' : 'block';
+      toggle.textContent = open ? 'Mostrar explicação' : 'Ocultar explicação';
+    });
+
+    // Signup button — mailto fallback
+    document.getElementById('signupBtn').addEventListener('click', ()=>{
+      location.href = 'mailto:contato@exemplo.com?subject=Inscrição%20ODS%20Segurança%20Digital';
+    });
+
+    // Chart.js
+    const ctx = document.getElementById('odsChart').getContext('2d');
+    const labels = ods.map(o => 'ODS ' + o.n);
+    const values = [60,55,70,66,60,62,68,58,66,60,63,57,54,60,58,62,64]; // simulated
+    const barColor = 'rgba(130,170,205,0.95)';
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Progresso (%)',
+          data: values,
+          backgroundColor: barColor,
+          borderRadius: 8,
+          barPercentage: 0.85,
+          categoryPercentage: 0.9
+        }]
+      },
+      options: {
+        maintainAspectRatio:false,
+        scales:{
+          x:{ ticks:{ color:'rgba(255,255,255,0.9)', font:{size:12}}, grid:{display:false} },
+          y:{ beginAtZero:true, max:100, ticks:{ color:'rgba(255,255,255,0.7)', callback: v => v + '%' }, grid:{ color:'rgba(255,255,255,0.04)'} }
+        },
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{ label: ctx => 'Progresso: ' + ctx.parsed.y + '%' }}
+        }
+      }
+    });
+  </script>
+</body>
+</html>
